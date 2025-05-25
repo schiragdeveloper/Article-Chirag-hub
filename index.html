@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chirag Articles & APKs - ज्ञान का भंडार</title>
+    <meta name="description" content="टेक, मोटिवेशन, ऐप्स, और अन्य विषयों पर नवीनतम लेख और उपयोगी APKs पाएं। चिराग द्वारा प्रस्तुत।">
+    <meta name="keywords" content="लेख, ब्लॉग, APK, डाउनलोड, टेक, मोटिवेशन, ऐप्स, AI, चिराग आर्टिकल्स, चिराग APKs">
+    <link rel="icon" href="https://via.placeholder.com/32/007bff/ffffff?text=CA" type="image/png"> <!-- छोटा सा Favicon -->
+
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+
+            --background-color-light: #f8f9fa;
+            --text-color-light: #212529;
+            --card-background-light: #ffffff;
+            --border-color-light: #dee2e6;
+
+            --background-color-dark: #1a1a1a; /* गहरा काला */
+            --text-color-dark: #e0e0e0;
+            --card-background-dark: #2c2c2c; /* थोड़ा हल्का काला */
+            --border-color-dark: #444444;
+
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.15);
+            --border-radius: 8px;
+            --transition-speed: 0.3s;
+        }
+
+        /* Default Light Mode */
+        body {
+            --bg-main: var(--background-color-light);
+            --text-main: var(--text-color-light);
+            --bg-card: var(--card-background-light);
+            --border-main: var(--border-color-light);
+        }
+
+        .dark-mode {
+            --bg-main: var(--background-color-dark);
+            --text-main: var(--text-color-dark);
+            --bg-card: var(--card-background-dark);
+            --border-main: var(--border-color-dark);
+
+            --primary-color: #00aeff; /* डार्क मोड में थोड़ी अलग प्राइमरी */
+            --secondary-color: #adb5bd;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.7;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            padding-top: 70px; /* Navbar height */
+        }
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+            padding: 10px 20px;
+            position: fixed; top:0; left:0; width:100%; z-index:1000;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border-main);
+            transition: background-color var(--transition-speed), border-color var(--transition-speed);
+        }
+        .navbar .logo { font-size: 1.9em; font-weight: 700; color: var(--primary-color); text-decoration: none; letter-spacing: -1px; }
+        .navbar .nav-links { list-style: none; display: flex; align-items: center; }
+        .navbar .nav-links li { margin-left: 25px; }
+        .navbar .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; transition: color var(--transition-speed); padding: 5px 0; position: relative; }
+        .navbar .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -2px; left: 0; background-color: var(--primary-color);
+            transition: width var(--transition-speed);
+        }
+        .navbar .nav-links a:hover { color: var(--primary-color); }
+        .navbar .nav-links a:hover::after { width: 100%; }
+
+        .nav-buttons-container { display: flex; align-items: center; }
+        .nav-action-btn {
+            background: transparent; color: var(--text-main); border: 1px solid var(--border-main);
+            padding: 8px 12px; border-radius: var(--border-radius); cursor: pointer; font-size: 0.9em;
+            margin-left:10px; transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed);
+        }
+        .nav-action-btn:hover { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
+        #darkModeToggle.active { background-color: var(--warning-color); color: black; }
+
+
+        /* Search Bar (moved to its own section for prominence) */
+        .search-section {
+            padding: 20px 0;
+            background-color: var(--bg-card);
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        .filters-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            align-items: center;
+        }
+        .filters-bar input[type="search"], .filters-bar select {
+            padding: 12px 15px;
+            border: 1px solid var(--border-main);
+            border-radius: var(--border-radius);
+            font-size: 1em;
+            background-color: var(--bg-main); /* Input background slightly different */
+            color: var(--text-main);
+            flex-grow: 1;
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+        .filters-bar input[type="search"]:focus, .filters-bar select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
+        .filters-bar input[type="search"] { min-width: 250px; }
+        .filters-bar select { min-width: 180px; }
+
+
+        /* Article/APK Card */
+        .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        .article-card {
+            background-color: var(--bg-card); border: 1px solid var(--border-main);
+            border-radius: var(--border-radius); box-shadow: var(--box-shadow);
+            overflow: hidden; transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            display: flex; flex-direction: column;
+            opacity: 0; transform: translateY(30px); /* Initial state for animation */
+        }
+        .article-card.visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .article-card:hover { transform: translateY(-8px); box-shadow: var(--box-shadow-hover); }
+        .article-card .article-image-wrapper { width: 100%; height: 220px; overflow: hidden; }
+        .article-card img.article-image {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.4s ease-out;
+        }
+        .article-card:hover img.article-image { transform: scale(1.05); }
+        .article-card .article-content-wrapper { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .article-card .article-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 0.85em; }
+        .article-card .article-category {
+            display: inline-block; background-color: var(--primary-color); color: white;
+            padding: 4px 10px; border-radius: calc(var(--border-radius) / 2); font-weight: 500;
+        }
+        .article-card .article-category.apk { background-color: var(--success-color); }
+        .article-card .article-author { color: var(--secondary-color); font-style: italic; }
+        .article-card h3 { font-size: 1.5em; margin-bottom: 10px; color: var(--text-main); line-height: 1.3; }
+        .article-card .article-snippet { font-size: 0.98em; color: var(--secondary-color); margin-bottom: 18px; flex-grow: 1; }
+        .article-full-content {
+            display: none; padding-top: 15px; border-top: 1px dashed var(--border-main);
+            margin-top: 15px; font-size: 1em; line-height: 1.8;
+        }
+        .article-full-content.expanded { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .card-actions { margin-top: auto; display: flex; justify-content: space-between; align-items: center; }
+        .action-btn {
+            color: white; border: none; padding: 10px 18px; text-decoration: none;
+            border-radius: var(--border-radius); cursor: pointer; font-weight: 500;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+        }
+        .action-btn.read-more { background-color: var(--primary-color); }
+        .action-btn.read-more:hover { background-color: darken(var(--primary-color), 10%); transform: translateY(-2px); }
+        .action-btn.download-apk { background-color: var(--success-color); }
+        .action-btn.download-apk:hover { background-color: darken(var(--success-color), 10%); transform: translateY(-2px); }
+
+        /* Share Buttons (simplified) */
+        .share-buttons-group { display: flex; gap: 8px; }
+        .share-btn-icon {
+            background: none; border: none; cursor: pointer; padding: 5px;
+            font-size: 1.2em; /* Placeholder for actual icons */
+            color: var(--secondary-color); transition: color var(--transition-speed);
+        }
+        .share-btn-icon:hover { color: var(--primary-color); }
+
+
+        /* General Content Sections (About, Contact) */
+        .content-section {
+            background-color: var(--bg-card); padding: 25px; margin-top: 30px;
+            border-radius: var(--border-radius); box-shadow: var(--box-shadow);
+        }
+        .content-section h2 { color: var(--primary-color); margin-bottom: 15px; font-size: 1.8em; }
+
+        /* Footer */
+        .footer {
+            background-color: var(--bg-card); color: var(--text-main); text-align: center;
+            padding: 25px; margin-top: 40px; border-top: 1px solid var(--border-main);
+        }
+
+        /* Admin Panel */
+        #adminPanel {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.7); z-index: 2000; padding: 20px; overflow-y: auto;
+        }
+        #adminPanelContent {
+            background-color: var(--bg-main); /* Use main bg for contrast */
+            color: var(--text-main);
+            padding: 25px; border-radius: var(--border-radius); max-width: 750px;
+            margin: 40px auto; box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+        #adminPanelContent h2 { border-bottom: 1px solid var(--border-main); padding-bottom: 10px; margin-bottom: 25px; }
+        .admin-form-group { margin-bottom: 20px; }
+        .admin-form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .admin-form-group input[type="text"],
+        .admin-form-group input[type="url"],
+        .admin-form-group select,
+        .admin-form-group textarea {
+            width: 100%; padding: 12px; border: 1px solid var(--border-main);
+            border-radius: var(--border-radius); background-color: var(--bg-card); /* Input bg same as card */
+            color: var(--text-main); font-size: 1em; transition: border-color var(--transition-speed);
+        }
+        .admin-form-group input:focus, .admin-form-group select:focus, .admin-form-group textarea:focus {
+            outline: none; border-color: var(--primary-color);
+        }
+        .admin-form-group textarea { min-height: 120px; resize: vertical; }
+        .admin-btn {
+            background-color: var(--primary-color); color: white; padding: 12px 20px;
+            border: none; border-radius: var(--border-radius); cursor: pointer;
+            font-size: 1em; font-weight: 500; transition: background-color var(--transition-speed);
+        }
+        .admin-btn:hover { background-color: darken(var(--primary-color), 10%); }
+        .admin-btn.secondary { background-color: var(--secondary-color); }
+        .admin-btn.secondary:hover { background-color: darken(var(--secondary-color), 10%); }
+        #generatedCodeOutput {
+            width: 100%; min-height: 180px; background-color: #222; color: #f0f0f0;
+            border: 1px solid var(--border-color-dark); padding: 15px; font-family: 'Courier New', monospace;
+            font-size: 0.95em; margin-top: 15px; white-space: pre-wrap; word-break: break-all;
+            border-radius: var(--border-radius);
+        }
+        .admin-instructions ol { margin-left: 20px; }
+        .admin-instructions li { margin-bottom: 8px; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { padding-top: 110px; /* Adjusted for potentially taller navbar */ }
+            .navbar { flex-direction: column; align-items: flex-start; padding: 10px 15px; }
+            .navbar .logo { margin-bottom: 10px; }
+            .navbar .nav-links { width: 100%; flex-direction: column; margin-top: 0; }
+            .navbar .nav-links li { margin-left: 0; margin-bottom: 8px; width: 100%; }
+            .navbar .nav-links a { display: block; padding: 10px 0; }
+            .navbar .nav-links a::after { display: none; } /* Hide underline on mobile nav */
+            .nav-buttons-container { position: absolute; top: 15px; right: 15px; }
+            .filters-bar { flex-direction: column; }
+            .article-card h3 { font-size: 1.3em; }
+        }
+         @media (max-width: 480px) {
+            .articles-grid { grid-template-columns: 1fr; }
+            .navbar .logo { font-size: 1.6em; }
+            .action-btn { padding: 10px 15px; font-size: 0.9em;}
+            .card-actions { flex-direction: column; align-items: stretch; gap: 10px; }
+            .share-buttons-group { justify-content: center; }
+         }
+        #noArticlesMessage { text-align: center; font-size: 1.2em; padding: 20px; color: var(--secondary-color); }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="#" class="logo">ChiragHub</a>
+        <ul class="nav-links">
+            <li><a href="#home" class="active-nav">Home</a></li>
+            <li><a href="#categories-section">Categories</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-buttons-container">
+            <button id="darkModeToggle" class="nav-action-btn" title="Toggle Dark Mode">🌙</button>
+            <button id="adminPanelToggle" class="nav-action-btn" title="Admin Panel">⚙️ Admin</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="home">
+            <div id="categories-section" class="search-section">
+                <form id="searchForm" class="filters-bar">
+                    <input type="search" id="searchInput" placeholder="लेख या APK खोजें..." aria-label="Search content">
+                    <select id="categoryFilter" aria-label="Filter by category">
+                        <option value="">सभी श्रेणियां</option>
+                    </select>
+                     <button type="submit" class="nav-action-btn" style="background-color: var(--primary-color); color:white;">Search</button>
+                </form>
+            </div>
+            <div id="articlesGrid" class="articles-grid">
+                <p id="noArticlesMessage" style="display:none;">खोज से कोई सामग्री मेल नहीं खाती।</p>
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <h2>हमारे बारे में (About Us)</h2>
+            <p>ChiragHub में आपका स्वागत है! यह प्लेटफॉर्म आपको टेक्नोलॉजी, मोटिवेशन, विभिन्न उपयोगी एप्लीकेशन्स (APKs), और आर्टिफिशियल इंटेलिजेंस जैसे अनेक विषयों पर गहन जानकारी और नवीनतम लेख उपलब्ध कराता है। हमारा लक्ष्य है कि हम अपने पाठकों को ज्ञानवर्धक और मनोरंजक सामग्री प्रदान करें जो उन्हें प्रेरित करे और उनके दैनिक जीवन में उपयोगी हो।</p>
+            <p>हम मानते हैं कि ज्ञान साझा करने से बढ़ता है, और इसीलिए हम विभिन्न क्षेत्रों के विशेषज्ञों और उत्साही लेखकों को एक मंच प्रदान करते हैं।</p>
+        </section>
+
+        <section id="contact" class="content-section">
+            <h2>हमसे संपर्क करें (Contact Us)</h2>
+            <p>आपके प्रश्नों, सुझावों या सहयोग के लिए, कृपया हमें <a href="mailto:info@chiraghub.com" style="color:var(--primary-color);">info@chiraghub.com</a> पर ईमेल करें। हम आपसे जल्द ही संपर्क करेंगे।</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© <span id="currentYear"></span> ChiragHub. All rights reserved. Designed by Chirag.</p>
+    </footer>
+
+    <div id="adminPanel">
+        <div id="adminPanelContent">
+            <h2>एडमिन पैनल - सामग्री प्रबंधन</h2>
+            <div id="adminSettingsArea" style="margin-bottom:20px; padding:15px; background-color: var(--bg-card); border: 1px solid var(--border-main); border-radius: var(--border-radius);">
+                <h4>साइट सेटिंग्स और निर्देश:</h4>
+                <p><strong>सामग्री हटाना:</strong> किसी लेख या APK को हटाने के लिए, आपको HTML फ़ाइल में `articlesData` ऐरे से उस आइटम के JavaScript ऑब्जेक्ट को मैन्युअल रूप से हटाना होगा। आइटम को उसकी `id` से पहचानें।</p>
+                <p><strong>फोटो अपलोड:</strong> फॉर्म में "Image URL" फ़ील्ड में इमेज का सीधा लिंक डालें। इमेज पहले से ही किसी ऑनलाइन लोकेशन पर होस्टेड होनी चाहिए (जैसे Imgur, Cloudinary, या आपकी अपनी वेब होस्टिंग)।</p>
+                <p><strong>पार्टनर एक्सेस:</strong> आपका पार्टनर भी इसी पासवर्ड (`adminchirag@123`) का उपयोग करके इस पैनल तक पहुँच सकता है और HTML फ़ाइल को संपादित कर सकता है।</p>
+            </div>
+
+            <form id="adminForm">
+                <div class="admin-form-group">
+                    <label for="itemType">सामग्री का प्रकार (Type):</label>
+                    <select id="itemType" name="itemType" required>
+                        <option value="article" selected>लेख (Article)</option>
+                        <option value="apk">APK</option>
+                    </select>
+                </div>
+                <div class="admin-form-group">
+                    <label for="itemTitle">शीर्षक (Title):</label>
+                    <input type="text" id="itemTitle" name="itemTitle" required>
+                </div>
+                <div class="admin-form-group">
+                    <label for="itemCategory">श्रेणी (Category):</label>
+                    <input type="text" id="itemCategory" name="itemCategory" list="existingCategories" required>
+                    <datalist id="existingCategories"></datalist> <!-- सुझावों के लिए -->
+                </div>
+                <div class="admin-form-group">
+                    <label for="itemAuthor">लेखक (Author):</label>
+                    <input type="text" id="itemAuthor" name="itemAuthor" value="Chirag" required>
+                </div>
+                <div class="admin-form-group">
+                    <label for="itemImage">इमेज URL (Image URL):</label>
+                    <input type="url" id="itemImage" name="itemImage" placeholder="https://example.com/image.jpg (WebP अनुशंसित)" required>
+                </div>
+                <div class="admin-form-group">
+                    <label for="itemSnippet">संक्षिप्त विवरण (Snippet):</label>
+                    <textarea id="itemSnippet" name="itemSnippet" rows="3" required></textarea>
+                </div>
+                <div class="admin-form-group">
+                    <label for="itemFullContent">पूरा कंटेंट (Full Content) / APK विवरण:</label>
+                    <textarea id="itemFullContent" name="itemFullContent" rows="6"></textarea>
+                </div>
+                <div class="admin-form-group" id="apkLinkGroup" style="display:none;">
+                    <label for="itemApkLink">APK डाउनलोड लिंक (APK Download Link):</label>
+                    <input type="url" id="itemApkLink" name="itemApkLink" placeholder="https://example.com/app.apk">
+                </div>
+      
